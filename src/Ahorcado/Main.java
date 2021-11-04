@@ -11,20 +11,26 @@ public class Main {
         String palabraElegida = elegirPalabra();
         char[] palabraOculta = transformarEnGuiones(palabraElegida);
         int vidas = 6;
-        Scanner entrada = new Scanner(System.in); // vamos a tomar ingreso del teclado
+        // vamos a tomar ingreso del teclado
+        Scanner entrada = new Scanner(System.in);
         System.out.println("Te quedan " + vidas + " vidas.");
         do {
-            System.out.println(palabraOculta); //imprimimos en pantalla los guiones
+            //imprimimos en pantalla los guiones
+            System.out.println(palabraOculta);
             System.out.println("Ingresá una letra...");
             boolean acierto = false;
-            char c = entrada.next().charAt(0); //Agarramos el primer carácter de la entrada y lo guardamos en la variable c
-            for (int i = 0; i < palabraElegida.length(); i++) { //arranca el bucle, recorremos comparando cada uno de los caracteres de la palabra a adivinar con el carácter ingresado
+            //Agarramos el primer carácter de la entrada y lo guardamos en la variable c
+            char c = entrada.next().charAt(0);
+            //acá arranca el bucle, recorremos comparando cada uno de los caracteres de la palabra a adivinar con el carácter ingresado
+            for (int i = 0; i < palabraElegida.length(); i++) {
                 if (palabraElegida.charAt(i) == c) {
-                    palabraOculta[i] = c;   //si la búsqueda es exitosa reemplazamos el guión por la letra.
+                    //si la búsqueda es exitosa reemplazamos el guión por la letra correspondiente
+                    palabraOculta[i] = c;
                     System.out.println("¡Bien!");
                     acierto = true;
                 }
             }
+            //si no acertamos la letra imprimimos un mensaje y restamos una vida. Si no quedan vidas GAME OVER
             if (!acierto) {
                 System.out.println("Esa letra no está, intentá otra.");
                 vidas -= 1;
@@ -33,24 +39,19 @@ public class Main {
                     System.out.println("MORISTE");
                     gameOver = true;
                 }
-            } else if (palabraElegida.equals(new String(palabraOculta))) {
+            }
+            // acá comparamos, si ya no quedan guiones, es decir, la palabra oculta es igual a la palabra elegida, ganamos y GAME OVER
+            else if (palabraElegida.equals(new String(palabraOculta))) {
                 System.out.println(palabraOculta);
                 System.out.println("¡Ganaste!");
                 gameOver = true;
             }
 
-        } while (!gameOver); //siempre y cuando no estemos muertos
+        } while (!gameOver); //Acá cerramos el bucle chequeando la variable gameOver
+        entrada.close();
     }
 
-
-    static boolean palabraAdivinada(char[] array) {
-        for (char c : array) {
-            if (c == '_') return false;
-        }
-        return true;
-    }
-
-
+    //Con este método sorteamos una palabra aleatoriamente de una lista predefinida
     static String elegirPalabra() {
         String[] palabras = {"gancho", "huir", "lupa", "cubierto", "fragmento", "escena", "dientes", "despertar", "tango", "esclavo"};
         Random rand = new Random();
@@ -59,6 +60,7 @@ public class Main {
 
     }
 
+    //Con este método transformamos la palabra que salió sorteada en una cadena de guiones
     static char[] transformarEnGuiones(String palabra) {
         int cantidadLetrasPalabraElegida = palabra.length();
         char[] palabraOculta = new char[cantidadLetrasPalabraElegida];
