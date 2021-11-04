@@ -21,6 +21,7 @@ public class Main {
             for (int i = 0; i < palabraElegida.length(); i++) { //arranca el bucle, recorremos comparando cada uno de los caracteres de la palabra a adivinar con el carácter ingresado
                 if (palabraElegida.charAt(i) == c) {
                     palabraOculta[i] = c;   //si la búsqueda es exitosa reemplazamos el guión por la letra.
+                    System.out.println("¡Bien!");
                     acierto = true;
                 }
             }
@@ -34,7 +35,7 @@ public class Main {
                 }
             } else if (palabraElegida.equals(new String(palabraOculta))) {
                 System.out.println(palabraOculta);
-                System.out.println("ganaste amigo");
+                System.out.println("¡Ganaste!");
                 gameOver = true;
             }
 
